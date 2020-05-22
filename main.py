@@ -7,7 +7,7 @@ import os, pygame, sys, random
 pygame.init()
 
 srcSize = (WIN_WIDTH, WIN_HEIGHT)
-FPS = 60
+FPS = 30
 
 screen = pygame.display.set_mode(srcSize)
 clock = pygame.time.Clock()
@@ -15,8 +15,9 @@ pygame.display.set_caption("Flappy Bird")
 
 def main_game():
   gameOver = False
+  gameSpeed = 2
 
-  bg = BG(screen)
+  bg = BG(screen, -1 * gameSpeed)
 
   while not gameOver:
 
@@ -24,6 +25,8 @@ def main_game():
       if event.type == QUIT:
         gameOver = True
         quit() 
+
+    bg.update()
 
     if pygame.display.get_surface() != None:
       bg.draw()
