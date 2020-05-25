@@ -35,8 +35,8 @@ def load_sprite_sheet(name, x, y, scaleX = -1, scaleY = -1):
       image = image.convert()
       image.blit(sheet, (0,0), rect)
 
-      #colorkey = image.get_at((0, 0))
-      #image.set_colorkey(colorkey, RLEACCEL)
+      colorkey = image.get_at((0, 0))
+      image.set_colorkey(colorkey, RLEACCEL)
 
       if scaleX != -1 or scaleY != -1:
         image = pygame.transform.scale(image, (scaleX, scaleY))
