@@ -15,13 +15,19 @@ class Bird():
     self.index = 0
     self.counter = 0
     self.gravity = 1.1
-    self.jumpVelocity = 14.5
+    self.jumpVelocity = 11.5
     self.movement = [0, 0]
     self.isDead = False
     self.screen = screen
 
   def jump(self):
     self.movement[1] = -1 * self.jumpVelocity
+
+  #def get_height(self):
+  #  return abs(self.rect.bottom - self.rect.top)
+
+  #def get_width(self):
+  #  return abs(self.rect.right - self.rect.left)
 
   def is_dead(self):
     return self.isDead

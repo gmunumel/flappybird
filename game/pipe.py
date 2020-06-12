@@ -9,13 +9,20 @@ class Pipe(pygame.sprite.Sprite):
 
     if (vFlip):
       self.image = pygame.transform.flip(self.image, False, True)
-      self.rect.bottom = int(abs(rand - 0.2) * WIN_HEIGHT)  
+      self.rect.bottom = int(abs(rand - 0.3) * WIN_HEIGHT)  
     else:
       self.rect.top = int(rand * WIN_HEIGHT)  
 
     self.rect.left = WIN_WIDTH + self.rect.width
 
     self.movement = [-1 * speed, 0]
+
+
+  #def get_height(self):
+  #  return abs(self.rect.bottom - self.rect.top)
+
+  #def get_width(self):
+  #  return abs(self.rect.right - self.rect.left)
 
   def draw(self):
     screen.blit(self.image, self.rect)
