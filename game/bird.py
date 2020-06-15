@@ -3,6 +3,12 @@ from game.lib import load_image
 import pygame
 
 class Bird():
+
+  MAX_ANGLE = 20
+  MIN_ANGLE = -90
+  JUMP_VELOCITY = 11.5
+  GRAVITY = 1.1
+
   def __init__(self, screen):
     self.image1, self.rect1 = load_image('bird1.png')
     self.image2, self.rect2 = load_image('bird2.png')
@@ -14,20 +20,16 @@ class Bird():
     self.rect.left = WIN_WIDTH * 0.3
     self.index = 0
     self.counter = 0
-    self.gravity = 1.1
-    self.jumpVelocity = 11.5
+    self.angle = 1
     self.movement = [0, 0]
     self.isDead = False
     self.screen = screen
+    self.countAngle = self.MAX_ANGLE
 
   def jump(self):
-    self.movement[1] = -1 * self.jumpVelocity
-
-  #def get_height(self):
-  #  return abs(self.rect.bottom - self.rect.top)
-
-  #def get_width(self):
-  #  return abs(self.rect.right - self.rect.left)
+    self.movement[1] = -1 * self.JUMP_VELOCITY
+    self.countAngle = self.MAX_ANGLE
+    self.angle = self.MAX_ANGLE
 
   def is_dead(self):
     return self.isDead
@@ -47,9 +49,24 @@ class Bird():
       self.counter = 0
       self.index = (self.index + 1) % 3
     self.image = self.images[self.index]
+    
+    self.countAngle -= 1
+
+    if self.countAngle < 0:
+      self.angle = self.countAngle
+    else:
+      self.angle += 1
+
+    if self.angle < self.MIN_ANGLE:
+      self.angle = self.MIN_ANGLE
+
+    if self.angle > self.MAX_ANGLE:
+      self.angle = self.MAX_ANGLE
+    
+    self.image = pygame.transform.rotate(self.image, self.angle)
     self.counter += 1
 
-    self.movement[1] += self.gravity
+    self.movement[1] += self.GRAVITY
 
     self.rect = self.rect.move(self.movement)
     

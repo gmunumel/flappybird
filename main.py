@@ -5,9 +5,9 @@ from game.score import Score
 from game.bird import Bird
 from game.globals import *
 from pygame.locals import *
-import os, pygame, sys, random, neat
+import os, pygame, sys, getopt, random, neat
 
-DRAW_LINES = True
+DRAW_LINES = False
 
 pygame.init()
 
@@ -63,8 +63,8 @@ def update_fitness(birds, pipes_s, genomes_track, nets):
   for i, bird in enumerate(birds):
     genomes_track[i].fitness += 0.1
 
-    distance = nets[i].activate((bird.rect.top, abs(bird.rect.top - pipes_s[0].rect.top), 
-                                abs(bird.rect.top - pipes_s[1].rect.bottom)))
+    distance = nets[i].activate((bird.rect.top, abs(bird.rect.top - pipes_s[0].rect.top + 10), 
+                                abs(bird.rect.top - pipes_s[1].rect.bottom - 10)))
 
     if distance[0] > 0.5:
       bird.jump()
@@ -175,8 +175,25 @@ def quit():
   pygame.quit()
   sys.exit()
 
-def main():
+def main(argv):
+
+  global DRAW_LINES
+
+  try:
+    opts, args = getopt.getopt(argv, 'hl')
+  except getopt.GetoptError:
+    print('python3 main.py [-l]')
+    sys.exit(2)
+  for opt, arg in opts:
+    if opt == '-h':
+      print('python3 main.py [-l]')
+      sys.exit()
+    elif opt == '-l':
+      DRAW_LINES = True
+    else:
+      DRAW_LINES = False
+
   config_neat()
 
 if __name__ == "__main__":
-  main()
+  main(sys.argv[1:])

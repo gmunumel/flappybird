@@ -17,13 +17,6 @@ class Pipe(pygame.sprite.Sprite):
 
     self.movement = [-1 * speed, 0]
 
-
-  #def get_height(self):
-  #  return abs(self.rect.bottom - self.rect.top)
-
-  #def get_width(self):
-  #  return abs(self.rect.right - self.rect.left)
-
   def draw(self):
     screen.blit(self.image, self.rect)
 
