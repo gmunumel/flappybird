@@ -23,10 +23,19 @@ Just run the instruction below to watch AI start training itself to play the gam
 python3 main.py
 ```
 
+Run with lines
+
+```
+python3 main.py -l
+```
 
 ## Demo application
 
-![Demo](/test/test1.gif)
+![Demo](/test/gameplay.gif)
+
+*With Lines*
+
+![Demo](/test/gameplay_lines.gif)
 
 ## License 
 

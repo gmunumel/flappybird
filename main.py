@@ -63,8 +63,8 @@ def update_fitness(birds, pipes_s, genomes_track, nets):
   for i, bird in enumerate(birds):
     genomes_track[i].fitness += 0.1
 
-    distance = nets[i].activate((bird.rect.top, abs(bird.rect.top - pipes_s[0].rect.top + 10), 
-                                abs(bird.rect.top - pipes_s[1].rect.bottom - 10)))
+    distance = nets[i].activate((bird.rect.top, abs(bird.rect.top - pipes_s[0].rect.top + 5), 
+                                abs(bird.rect.top - pipes_s[1].rect.bottom - 5)))
 
     if distance[0] > 0.5:
       bird.jump()
